@@ -1,0 +1,138 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* =========================
+   LOGIN PAGE
+========================= */
+.login-page {
+    background: linear-gradient(135deg, #1A5276, #39A900);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* idioma */
+.login-page .language-box {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+/* contenedor centrado */
+.login-page .login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* tarjeta */
+.login-page .login-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* header */
+.login-page .login-header {
+    background: #1A5276;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+.login-page .login-header i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* inputs */
+.login-page .form-control {
+    border-radius: 10px;
+}
+
+.login-page .input-group-text {
+    border-radius: 10px 0 0 10px;
+    background: #f1f1f1;
+}
+
+/* botón */
+.login-page .btn-login {
+    background: #39A900;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    transition: 0.3s;
+    color: white;
+}
+
+.login-page .btn-login:hover {
+    background: #2e7d32;
+}
+
+/* link */
+.login-page a {
+    color: #1A5276;
+    text-decoration: none;
+}
+
+.login-page a:hover {
+    text-decoration: underline;
+}
+
+/* footer */
+.login-page .footer-login {
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   OVERLAY LOADING GLOBAL
+========================= */
+.loading-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2147483647;
+    backdrop-filter: blur(5px);
+}
+
+/* caja del loader */
+.loading-box{
+    background: white;
+    padding: 25px 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    animation: pop 0.2s ease-in-out;
+}
+
+/* animación entrada */
+@keyframes pop {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* stacking correcto del login */
+.login-container,
+.login-card {
+    position: relative;
+    z-index: 1;
+}

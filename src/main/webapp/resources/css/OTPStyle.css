@@ -1,0 +1,75 @@
+/* =========================
+   OTP PAGE
+========================= */
+.otp-page {
+  background: linear-gradient(135deg, #1A5276, #39A900);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* idioma */
+.otp-page .language-box {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+/* contenedor */
+.otp-page .otp-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* card */
+.otp-page .otp-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* header */
+.otp-page .otp-header {
+  background: #1A5276;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+/* input */
+.otp-page .otp-input {
+  font-size: 22px;
+  letter-spacing: 5px;
+  border-radius: 10px;
+}
+
+/* botón */
+.otp-page .btn-otp {
+  background: #39A900;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  transition: 0.3s;
+}
+
+.otp-page .btn-otp:hover {
+  background: #2e7d32;
+}
+
+/* badge timer */
+.otp-page .timer-badge {
+  font-size: 14px;
+}
+
+/* footer */
+.otp-page .footer-otp {
+  text-align: center;
+  color: white;
+  font-size: 13px;
+  margin-bottom: 10px;
+}

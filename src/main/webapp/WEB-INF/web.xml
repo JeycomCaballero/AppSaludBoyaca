@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="5.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
+    <display-name>Sistema de Gestión de Vacunación</display-name>
+    <!-- Configuración de internacionalización -->
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>messages</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.fallbackLocale</param-name>
+        <param-value>es</param-value>
+    </context-param>
+    <filter>
+        <filter-name>LocaleFilter</filter-name>
+        <filter-class>co.sena.cimm.adso.saludboyaca.util.LocaleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LocaleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>co.sena.cimm.adso.saludboyaca.util.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/dashboard</url-pattern>
+        <url-pattern>/pacientes</url-pattern>
+        <url-pattern>/vacunas</url-pattern>
+        <url-pattern>/registros</url-pattern>
+        <url-pattern>/usuarios</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>co.sena.cimm.adso.saludboyaca.controller.LoginServlet</servlet-class>
+    </servlet>
+   
+    <servlet>
+        <servlet-name>VacunaServlet</servlet-name>
+        <servlet-class>co.sena.cimm.adso.saludboyaca.controller.VacunaServlet</servlet-class>
+    </servlet>
+   
+    <servlet>
+        <servlet-name>RegistroVacunacionServlet</servlet-name>
+        <servlet-class>co.sena.cimm.adso.saludboyaca.controller.RegistroVacunacionServlet</servlet-class>
+    </servlet>
+   
+    <servlet>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <servlet-class>co.sena.cimm.adso.saludboyaca.controller.UsuarioServlet</servlet-class>
+    </servlet>
+    
+
+    <!-- Configuración de bienvenida -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <!-- Configuración de sesión -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <!-- 30 minutos -->
+    </session-config>
+    <!-- Página de error personalizada -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+</web-app>
