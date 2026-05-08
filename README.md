@@ -1,160 +1,235 @@
-# Sistema de Gestión de Vacunación / Vaccination Management System
+# 🏥 SaludBoyacá - Sistema de Gestión de Citas Médicas
 
-Un sistema web desarrollado en Java (Jakarta EE, JSP, Servlets) con MySQL para gestionar registros de vacunación. 
-Incluye autenticación con CAPTCHA, gestión de pacientes, vacunas y registros, además de un módulo 
-de consulta pública con generación de certificados en PDF.
+Sistema web desarrollado en **Java (Jakarta EE, JSP, Servlets)** con **MySQL**, orientado a la gestión de citas médicas, pacientes, médicos y autenticación segura con OTP.
 
-**Soporte Multiidioma**: La aplicación está completamente internacionalizada y soporta **4 idiomas**:
-- Español (es)
-- English (en)  
-- Français (fr)
-- Italiano (it)
+Incluye arquitectura por capas (DAO - DTO - Controller), seguridad por sesión, generación de PDF y despliegue en contenedores Docker.
 
-## Características
+---
 
-- **Autenticación Segura**: Login con verificación CAPTCHA para prevenir ataques automatizados
-- **Gestión Completa**: CRUD completo para pacientes, vacunas y registros de vacunación
-- **Consulta Pública**: Módulo para que pacientes consulten su historial con su documento de identidad
-- **Generación de Documentos**: Certificados de vacunación en PDF y exportación a Excel
-- **Interfaz Responsiva**: Diseño adaptable usando Bootstrap 5 y CSS personalizado
-- **Multiidioma (i18n)**: Internacionalización completa con JSTL fmt tags y resource bundles
-- **Seguridad**: Control de sesiones y validaciones en frontend y backend
+## 🚀 Características principales
 
-## Requisitos Previos
+- 🔐 Autenticación segura con OTP por correo
+- 👥 Gestión de usuarios (Médicos, Recepcionistas, Enfermeros)
+- 🏥 Gestión de pacientes
+- 📅 Sistema completo de citas médicas
+- ⏰ Validación de horarios de médicos
+- 📄 Generación de PDF (citas / comprobantes)
+- 🌐 Internacionalización (i18n con LocaleFilter)
+- 🐳 Despliegue con Docker (Multi-stage build)
+- ☁️ Compatible con Render, Koyeb, Cloud Run y Back4App
+
+---
+
+## 🧱 Tecnologías utilizadas
+
+- Java 14+
+- Jakarta EE (Servlets, JSP)
+- Apache Tomcat 10+
+- MySQL 8+
+- Maven
+- iText PDF
+- JavaMail (OTP)
+- Docker
+
+---
+
+## 📦 Estructura del proyecto
+
+```
+SaludBoyaca/
+├── src/
+│   ├── controller/        # Servlets
+│   ├── dao/               # Acceso a datos
+│   ├── dto/               # Objetos de datos
+│   ├── util/              # OTPService, LocaleFilter, PDFGenerator
+│   └── webapp/
+│       ├── views/         # JSP
+│       └── WEB-INF/
+├── Dockerfile
+├── pom.xml
+└── README.md
+```
+
+---
+
+## ⚙️ Requisitos
 
 - JDK 14 o superior
-- Apache Tomcat 9.0 o superior
-- MySQL 8.0 o superior
-- Maven 3.6 o superior
+- Maven 3.6+
+- MySQL 8+
+- Apache Tomcat 10+
+- Docker (opcional)
 
-## Instalación
+---
 
-1. **Clonar el repositorio**:
-   ```
-   git clone https://github.com/tu-usuario/sistema-vacunacion.git
-   ```
+## 🛠️ Instalación en otro PC
 
-2. **Configurar la base de datos**:
-   - Crear una base de datos MySQL
-   - Ejecutar el script `src/main/resources/vacunacion_db.sql`
-   - Modificar los datos de conexión en `src/main/java/sena/adso/captcha/model/Conexion.java` si es necesario
+### 1. Clonar el proyecto
 
-3. **Compilar el proyecto**:
-   ```
-   mvn clean package
-   ```
-
-4. **Desplegar el archivo WAR**:
-   - Copiar el archivo `target/captcha-1.0.war` al directorio `webapps` de Tomcat
-   - Iniciar o reiniciar Tomcat
-
-## Uso del Sistema
-
-### Acceso al Sistema
-
-- URL: `http://localhost:8080/captcha/`
-- **Credenciales por defecto**:
-  - Usuario: `admin`
-  - Contraseña: `admin123`
-
-### Módulos del Sistema
-
-1. **Dashboard**: Vista general con estadísticas y accesos rápidos
-2. **Pacientes**: Gestión de datos de personas a vacunar
-3. **Vacunas**: Control de vacunas disponibles
-4. **Registros de Vacunación**: Gestión de aplicaciones de vacunas
-5. **Personal Médico**: Administración de usuarios del sistema
-6. **Consulta Pública**: Acceso para pacientes sin credenciales
-
-### Flujo de Trabajo Típico
-
-1. Registrar un nuevo paciente
-2. Registrar vacunas disponibles
-3. Crear un nuevo registro de vacunación
-4. Generar certificado para el paciente
-
-## Capturas de Pantalla
-
-- Página de Login con CAPTCHA
-- Dashboard principal
-- Formulario de registro de vacunación
-- Módulo de consulta pública
-- Ejemplo de certificado PDF
-
-## Internacionalización (i18n)
-
-El sistema utiliza **JSTL Internationalization Tags** para soporte multiidioma.
-
-### Arquitectura i18n
-
-```
-├── src/main/resources/
-│   ├── messages.properties          # Español (default)
-│   ├── messages_en.properties       # English
-│   ├── messages_fr.properties       # Français
-│   └── messages_it.properties       # Italiano
-├── src/main/java/sena/adso/captcha/util/
-│   └── LocaleFilter.java            # Filtro de cambio de idioma
-└── src/main/webapp/views/
-    ├── login.jsp                    # Selector de idioma
-    ├── dashboard.jsp                # Textos con <fmt:message>
-    └── templates/header.jsp         # Menú traducible
+```bash
+git clone https://github.com/tu-usuario/saludboyaca.git
+cd saludboyaca
 ```
 
-### Componentes Principales
+---
 
-| Componente | Descripción |
-|------------|-------------|
-| `LocaleFilter` | Intercepta peticiones y gestiona el locale en sesión |
-| `messages_*.properties` | Archivos de recursos con traducciones |
-| `<fmt:setLocale>` | Establece el idioma en cada JSP |
-| `<fmt:message>` | Muestra texto traducido |
+### 2. Crear base de datos
 
-### Cambiar Idioma
+```sql
+CREATE DATABASE saludboyaca;
+```
 
-Los usuarios pueden cambiar el idioma en cualquier momento mediante el selector ubicado en:
-- **Login**: Selector desplegable en la barra superior
-- **Header**: Selector en la barra de navegación (todas las páginas protegidas)
+Importar script:
 
-El idioma seleccionado se almacena en la sesión y persiste durante toda la navegación.
+```bash
+mysql -u root -p saludboyaca < database.sql
+```
 
-### Agregar Nuevas Traducciones
+Configurar conexión en el proyecto:
 
-1. **Editar archivo de recursos** (ej. `messages_en.properties`):
-   ```properties
-   # General
-   app.titulo=Vaccination Management System
-   app.nuevo=New
-   app.guardar=Save
-   
-   # Módulos
-   pacientes.titulo=Patient Management
-   vacunas.titulo=Vaccine Management
-   ```
+```java
+jdbc:mysql://localhost:3306/saludboyaca
+usuario
+contraseña
+```
 
-2. **Usar en JSP**:
-   ```jsp
-   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-   
-   <fmt:setLocale value="${sessionScope.locale}" />
-   <fmt:setBundle basename="messages" />
-   
-   <h1><fmt:message key="app.titulo" /></h1>
-   ```
+---
 
-### Soporte DataTables
+### 3. Compilar proyecto
 
-Los componentes DataTables también se traducen dinámicamente según el idioma seleccionado mediante archivos JSON de CDN:
-- Español: `es-ES.json`
-- English: `en-GB.json`  
-- Français: `fr-FR.json`
-- Italiano: `it-IT.json`
+```bash
+mvn clean package
+```
 
-## Licencia
+Se genera:
 
-Este proyecto está licenciado bajo la Licencia MIT.
+```
+target/saludboyaca.war
+```
 
-## Contacto / Contact
+---
 
-Para preguntas o soporte técnico, contactar a: 
-- Email: oaranguren@sena.edu.co
+### 4. Desplegar en Tomcat
+
+Copiar WAR:
+
+```bash
+cp target/saludboyaca.war tomcat/webapps/
+```
+
+Iniciar Tomcat:
+
+```bash
+startup.bat   (Windows)
+startup.sh    (Linux/Mac)
+```
+
+Abrir en navegador:
+
+```
+http://localhost:8080/saludboyaca
+```
+
+---
+
+
+## 📧 Flujo de autenticación
+
+1. Usuario ingresa credenciales  
+2. Sistema valida usuario en BD  
+3. Se genera OTP con SecureRandom  
+4. OTP se envía al correo  
+5. Usuario ingresa OTP  
+6. Se crea sesión activa  
+
+---
+
+## 📅 Módulo de citas
+
+- Crear cita  
+- Editar cita  
+- Eliminar cita  
+- Ver detalle de cita  
+- Validar disponibilidad de horario médico  
+- Estados:
+  - PROGRAMADA  
+  - CONFIRMADA  
+  - ATENDIDA  
+  - CANCELADA  
+
+---
+
+## 🌐 Internacionalización (i18n)
+
+Controlado por `LocaleFilter`
+
+Idiomas disponibles:
+
+- Español (default)
+- English
+- Français
+- Italiano
+
+---
+
+## 🐳 Docker
+
+### Construir imagen
+
+```bash
+docker build -t saludboyaca .
+```
+
+### Ejecutar contenedor
+
+```bash
+docker run -p 8080:8080 saludboyaca
+```
+
+---
+
+## ☁️ Despliegue en la nube
+
+Variables de entorno:
+
+- DB_URL
+- DB_USER
+- DB_PASS
+- EMAIL_PASS
+
+Puerto: `8080`
+
+---
+
+## 📊 Arquitectura del sistema
+
+```
+JSP (Vista)
+   ↓
+Servlet (Controlador)
+   ↓
+DAO (Lógica de datos)
+   ↓
+MySQL (Base de datos)
+```
+
+---
+
+## 📄 Generación de PDF
+
+Usa **iTextPDF** para:
+
+- Comprobantes de citas
+- Listados de citas
+- Reportes médicos
+
+---
+
+## 🧠 Aprendizajes del proyecto
+
+- Arquitectura MVC real en Java EE
+- Seguridad con OTP
+- Uso de filtros (AuthFilter, LocaleFilter)
+- Separación DAO / DTO
+- Generación de PDF dinámico
+- Despliegue en cloud con Docker
