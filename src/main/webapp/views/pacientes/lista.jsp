@@ -13,13 +13,13 @@
     <fmt:message key="paciente.lista.titulo"/>
 </h3>
 <c:if test="${sessionScope.usuario.rol == 'RECEPCIONISTA'}">
-<!-- BOTÓN NUEVO -->
-<form action="${pageContext.request.contextPath}/pacientes" method="post">
-    <button type="submit" name="action" value="nuevo" class="btn btn-success mb-3">
-        <i class="fas fa-plus me-1"></i>
-        <fmt:message key="paciente.nuevo"/>
-    </button>
-</form>
+    <!-- BOTÓN NUEVO -->
+    <form action="${pageContext.request.contextPath}/pacientes" method="post">
+        <button type="submit" name="action" value="nuevo" class="btn btn-success mb-3">
+            <i class="fas fa-plus me-1"></i>
+            <fmt:message key="paciente.nuevo"/>
+        </button>
+    </form>
 </c:if>
 <div class="card shadow-sm">
     <div class="card-body">
@@ -50,30 +50,30 @@
                                 <fmt:formatDate value="${p.fechaNacimiento}" pattern="dd/MM/yyyy"/>
                             </td>
 
-                            <td class="text-center d-flex justify-content-center gap-2">
-                                <c:if test="${sessionScope.usuario.rol == 'RECEPCIONISTA'}">
+                            <td class="text-center">
+
+                                <div class="d-flex justify-content-center gap-2">
+
                                     <!-- EDITAR -->
-                                    <form action="${pageContext.request.contextPath}/pacientes" method="post">
+                                    <form action="${pageContext.request.contextPath}/pacientes"
+                                          method="post">
+
                                         <input type="hidden" name="id" value="${p.id}">
-                                        <button type="submit" name="action" value="editar"
+
+                                        <button type="submit"
+                                                name="action"
+                                                value="editar"
                                                 class="btn btn-warning btn-sm">
+
                                             <i class="fas fa-edit"></i>
-                                        </button>
-                                    </form>
-                                </c:if>
-                                <c:if test="${sessionScope.usuario.rol == 'RECEPCIONISTA'}">
-                                    <!-- ELIMINAR -->
-                                    <form action="${pageContext.request.contextPath}/pacientes" method="post"
-                                          onsubmit="return confirm('<fmt:message key="paciente.confirmar"/>');">
 
-                                        <input type="hidden" name="id" value="${p.id}">
-
-                                        <button type="submit" name="action" value="eliminar"
-                                                class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
                                         </button>
+
+
                                     </form>
-                                </c:if>
+
+                                </div>
+
                             </td>
                         </tr>
                     </c:forEach>
@@ -103,46 +103,46 @@
         String msg = (String) request.getAttribute("msg");
 
         if (msg == "Se elimino correctamente" && msg != null) {%>
-                                  Swal.fire({
-                                      icon: 'success',
-                                      title: '<%= msg%>',
-                                      confirmButtonColor: '#1c5fa8',
-                                      background: '#1e293b',
-                                      color: 'white',
-                                      timer: 1500,
-                                      showConfirmButton: false
-                                  }).then(() => {
-                                      window.location.href = "pacientes";
-                                  });
+                    Swal.fire({
+                        icon: 'success',
+                        title: '<%= msg%>',
+                        confirmButtonColor: '#1c5fa8',
+                        background: '#1e293b',
+                        color: 'white',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = "pacientes";
+                    });
     <% } %>
 
     <%
         if (msg == "Se actualizo correctamente" && msg != null) {%>
-                                  Swal.fire({
-                                      icon: 'success',
-                                      title: '<%= msg%>',
-                                      confirmButtonColor: '#1c5fa8',
-                                      background: '#1e293b',
-                                      color: 'white',
-                                      timer: 1500,
-                                      showConfirmButton: false
-                                  }).then(() => {
-                                      window.location.href = "pacientes";
-                                  });
+                    Swal.fire({
+                        icon: 'success',
+                        title: '<%= msg%>',
+                        confirmButtonColor: '#1c5fa8',
+                        background: '#1e293b',
+                        color: 'white',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = "pacientes";
+                    });
     <% } %>
     <%
-          if (msg == "Se creo correctamente" && msg != null) {%>
-                                  Swal.fire({
-                                      icon: 'success',
-                                      title: '<%= msg%>',
-                                      confirmButtonColor: '#1c5fa8',
-                                      background: '#1e293b',
-                                      color: 'white',
-                                      timer: 1500,
-                                      showConfirmButton: false
-                                  }).then(() => {
-                                      window.location.href = "pacientes";
-                                  });
+        if (msg == "Se creo correctamente" && msg != null) {%>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '<%= msg%>',
+                        confirmButtonColor: '#1c5fa8',
+                        background: '#1e293b',
+                        color: 'white',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = "pacientes";
+                    });
     <% }%>
 
 </script>

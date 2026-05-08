@@ -57,7 +57,14 @@ public class HorarioServlet extends HttpServlet {
         if (rol.equals("MEDICO")) {
             lista = dao.listarPorNombreMedico(usuario.getNombreCompleto());
         } else {
-            lista = dao.listarTodos();
+            if (nombreMedico != null && !nombreMedico.trim().isEmpty()) {
+
+                lista = dao.listarPorNombreMedico(nombreMedico);
+
+            } else {
+
+                lista = dao.listarTodos();
+            }
         }
 
         req.setAttribute("horarios", lista);

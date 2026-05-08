@@ -49,6 +49,7 @@ public class PacienteServlet extends HttpServlet {
         try {
 
             String action = req.getParameter("action");
+            System.out.println("accion: " + action);
 
             if ("nuevo".equals(action)) {
                 req.getRequestDispatcher("/views/pacientes/formulario.jsp").forward(req, res);
@@ -113,7 +114,7 @@ public class PacienteServlet extends HttpServlet {
                 req.getRequestDispatcher("/views/pacientes/lista.jsp").forward(req, res);
             }
 
-            if ("eliminar".equals(action)) {
+            if ("deleteU".equals(action)) {
 
                 int id = Integer.parseInt(req.getParameter("id"));
                 dao.eliminar(id);

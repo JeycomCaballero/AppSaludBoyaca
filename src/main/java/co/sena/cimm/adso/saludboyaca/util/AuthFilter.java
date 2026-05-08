@@ -1,11 +1,9 @@
 package co.sena.cimm.adso.saludboyaca.util;
 
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/*"})
 public class AuthFilter implements Filter {
 
     @Override

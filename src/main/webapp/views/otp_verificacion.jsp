@@ -70,6 +70,11 @@
                         <fmt:message key="otp.instruccion"/>
                     </p>
 
+                    <p class="text-center small text-secondary">
+                        Código enviado a:
+                        <strong>${emailEnmascarado}</strong>
+                    </p>
+
                     <!-- TIMER -->
                     <div class="text-center mb-3">
                         <span class="badge bg-warning text-dark timer-badge">
@@ -181,7 +186,7 @@
             }).then(() => {
                 window.location.href = "dashboard";
             });
-            <% } %>
+            <% }%>
         </script>
 
     </body>

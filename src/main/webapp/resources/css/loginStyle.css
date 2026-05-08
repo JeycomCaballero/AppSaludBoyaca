@@ -3,9 +3,7 @@ html, body {
     margin: 0;
 }
 
-/* =========================
-   LOGIN PAGE
-========================= */
+
 .login-page {
     background: linear-gradient(135deg, #1A5276, #39A900);
     min-height: 100vh;
@@ -13,11 +11,12 @@ html, body {
     flex-direction: column;
 }
 
-/* idioma */
-.login-page .language-box {
-    position: absolute;
+
+.language-box {
+    position: fixed;
     top: 15px;
     right: 20px;
+    z-index: 9999;
 }
 
 /* contenedor centrado */
@@ -93,9 +92,6 @@ html, body {
     margin-bottom: 10px;
 }
 
-/* =========================
-   OVERLAY LOADING GLOBAL
-========================= */
 .loading-overlay{
     position: fixed;
     inset: 0;
@@ -129,10 +125,10 @@ html, body {
         opacity: 1;
     }
 }
-
-/* stacking correcto del login */
-.login-container,
-.login-card {
+.login-page {
     position: relative;
-    z-index: 1;
+}
+
+.dropdown-menu {
+    z-index: 99999 !important;
 }

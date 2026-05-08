@@ -213,6 +213,11 @@ public class CitaDAOImpl implements CitaDAO {
                 Cita c = new Cita();
 
                 c.setId(rs.getInt("id"));
+
+                c.setIdPaciente(rs.getInt("id_paciente"));
+                c.setIdMedico(rs.getInt("id_medico"));
+                c.setIdEspecialidad(rs.getInt("id_especialidad"));
+
                 c.setFechaCita(rs.getDate("fecha_cita"));
                 c.setHoraCita(rs.getString("hora_cita"));
                 c.setEstado(rs.getString("estado"));

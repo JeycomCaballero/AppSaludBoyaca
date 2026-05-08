@@ -140,7 +140,7 @@ public class CitaServlet extends HttpServlet {
                 req.getRequestDispatcher("/views/citas/lista.jsp").forward(req, res);
                 return;
             }
-            if("pdfHoy".equals(action)){
+            if ("pdfHoy".equals(action)) {
                 generarPDFHoy(req, res);
                 return;
             }
@@ -214,6 +214,7 @@ public class CitaServlet extends HttpServlet {
             CitaDAOImpl dao = new CitaDAOImpl();
 
             List<Cita> citasHoy = dao.listarCitasHoy();
+            System.out.println("CITAS HOY: " + citasHoy.size());
 
             byte[] pdf = PDFGenerator.generarListaCitasHoy(citasHoy);
 

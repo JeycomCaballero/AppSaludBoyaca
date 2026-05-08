@@ -10,6 +10,9 @@ import co.sena.cimm.adso.saludboyaca.dao.CitaDAOImpl;
 import co.sena.cimm.adso.saludboyaca.dto.Usuario;
 import co.sena.cimm.adso.saludboyaca.dto.Cita;
 import jakarta.servlet.annotation.WebServlet;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
@@ -40,16 +43,45 @@ public class DashboardServlet extends HttpServlet {
 
         try {
             List<Cita> citas = citaDAO.listar();
+            int citasHoy = 0;
+            int citasPendientes = 0;
+            int citasMes = 0;
+
+            Set<Integer> pacientes = new HashSet<>();
+
+            LocalDate hoy = LocalDate.now();
+
+            for (Cita c : citas) {
+
+                if ("CONFIRMADA".equalsIgnoreCase(c.getEstado())) {
+                    citasPendientes++;
+                }
+
+                pacientes.add(c.getIdPaciente());
+
+                LocalDate fecha = new java.sql.Date(c.getFechaCita().getTime()).toLocalDate();
+
+                if (fecha.equals(hoy)) {
+                    citasHoy++;
+                }
+
+                if (fecha.getMonthValue() == hoy.getMonthValue()
+                        && fecha.getYear() == hoy.getYear()) {
+
+                    citasMes++;
+                }
+            }
 
             request.setAttribute("listaCitas", citas);
             request.setAttribute("totalCitas", citas.size());
 
-            request.setAttribute("citasHoy", citas.size());
-            request.setAttribute("citasPendientes", citas.size());
-            request.setAttribute("citasMes", citas.size());
-            request.setAttribute("totalPacientes", citas.size());
+            request.setAttribute("citasHoy", citasHoy);
+            request.setAttribute("citasPendientes", citasPendientes);
+            request.setAttribute("citasMes", citasMes);
+            request.setAttribute("totalPacientes", pacientes.size());
 
         } catch (Exception e) {
+            e.printStackTrace();
             request.setAttribute("error", "Error cargando dashboard");
         }
 

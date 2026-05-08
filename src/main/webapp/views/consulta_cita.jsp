@@ -30,6 +30,11 @@
                 display: flex;
                 flex-direction: column;
             }
+            .consulta-page .language-box {
+                position: absolute;
+                top: 15px;
+                right: 20px;
+            }
 
             .consulta-container {
                 flex: 1;
@@ -70,9 +75,10 @@
             }
 
             .language-box {
-                position: absolute;
+                position: fixed;
                 top: 15px;
                 right: 20px;
+                z-index: 9999;
             }
 
             .footer-consulta {
@@ -89,7 +95,7 @@
         <!-- 🌐 IDIOMA -->
         <div class="language-box">
             <div class="dropdown">
-                <button class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                <button class="btn btn-light btn-sm dropdown-toggle" style="z-index: 2;" data-bs-toggle="dropdown">
                     🌐
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -172,6 +178,7 @@
                                         <th><fmt:message key="citas.medico"/></th>
                                         <th><fmt:message key="citas.especialidad"/></th>
                                         <th><fmt:message key="citas.estado"/></th>
+                                        <th><fmt:message key="citas.pdf"/></th>
                                     </tr>
                                 </thead>
 
@@ -186,6 +193,16 @@
                                                 <span class="badge bg-info text-dark">
                                                     ${c.estado}
                                                 </span>
+                                            </td>
+                                            <td>
+                                                <form action="${pageContext.request.contextPath}/consulta-cita" method="get">
+                                                    <input type="hidden" name="id" value="${c.id}">
+
+                                                    <button type="submit" name="accion" value="descargar" class="btn btn-danger btn-sm">
+                                                        <i class="fa-solid fa-file-pdf me-1"></i>
+                                                        <fmt:message key="citas.descargar"/>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>

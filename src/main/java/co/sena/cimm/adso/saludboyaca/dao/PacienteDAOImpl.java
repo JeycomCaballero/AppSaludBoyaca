@@ -60,6 +60,9 @@ public class PacienteDAOImpl implements PacienteDAO {
 
             ps.setInt(1, id);
             ps.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+            
         }
     }
 

@@ -33,6 +33,8 @@ public class ConsultaCitaServlet extends HttpServlet {
 
         String accion = request.getParameter("accion");
 
+        System.out.println("Accion: " + accion);
+        
         if ("descargar".equals(accion)) {
             descargarPDF(request, response);
             return;

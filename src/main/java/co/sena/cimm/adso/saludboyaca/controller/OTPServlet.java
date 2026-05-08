@@ -36,12 +36,13 @@ public class OTPServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
+        String emailEnmascarado = enmascararEmail(usuario.getEmail());
+        request.setAttribute("emailEnmascarado", emailEnmascarado);
 
         session.setAttribute("otpStartTime", System.currentTimeMillis());
         request.getRequestDispatcher("/views/otp_verificacion.jsp").forward(request, response);
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -61,7 +62,6 @@ public class OTPServlet extends HttpServlet {
         }
     }
 
-    
     private void verificarCodigo(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -101,7 +101,6 @@ public class OTPServlet extends HttpServlet {
         }
     }
 
-   
     private void reenviarCodigo(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
@@ -126,7 +125,6 @@ public class OTPServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/otp");
     }
 
-  
     private String buildOtpEmail(Usuario usuario, String otp) {
 
         return "<!DOCTYPE html>"
@@ -161,6 +159,24 @@ public class OTPServlet extends HttpServlet {
                 + "</div>"
                 + "</body>"
                 + "</html>";
+    }
+
+    private String enmascararEmail(String email) {
+
+        if (email == null || !email.contains("@")) {
+            return "***";
+        }
+
+        String[] partes = email.split("@");
+
+        String local = partes[0];
+        String dominio = partes[1];
+
+        if (local.length() <= 3) {
+            return local + "***@" + dominio;
+        }
+
+        return local.substring(0, 3) + "***@" + dominio;
     }
 
     @Override
