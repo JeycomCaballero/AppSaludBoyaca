@@ -167,7 +167,6 @@ Idiomas disponibles:
 
 - Español (default)
 - English
-- Français
 - Italiano
 
 ---
