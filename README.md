@@ -79,10 +79,10 @@ cd saludboyaca
 CREATE DATABASE saludboyaca;
 ```
 
-Importar script:
+Base de datos script:
 
 ```bash
-mysql -u root -p saludboyaca < database.sql
+src/main/resources/Script.sql
 ```
 
 Configurar conexión en el proyecto:
